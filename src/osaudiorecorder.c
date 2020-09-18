@@ -1338,8 +1338,11 @@ OSARBool OSAudioRecorder_encoderFinish(STOSAudioRecorder* obj){ //Cancel
 //Opus
 
 #include "ogg/ogg.h"
+#ifdef Linux
+#include "opus/opus.h"
+#else
 #include "opus/include/opus.h"
-
+#endif
 #define OPUS_MAX_PACKET (1500)
 
 typedef struct STOSAudioRecorderEncoderOpusState_ {
@@ -1628,7 +1631,11 @@ OSARBool OSAudioRecorderEncoderOpusEnd(void* userData, FILE* dst){
 
 //Flac
 
+#ifdef Linux
+#include "FLAC/stream_encoder.h"
+#else
 #include "flac/include/FLAC/stream_encoder.h"
+#endif
 
 typedef struct STOSAudioRecorderEncoderFlacState_ {
 	FLAC__StreamEncoder* encoder;
